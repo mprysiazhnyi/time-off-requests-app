@@ -111,7 +111,7 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
             data-testid="note-textarea"
             placeholder="Optional note..."
             value={note}
-            onIonChange={(e) => setNote(e.detail.value!)}
+            onIonInput={(e) => setNote(e.detail.value!)}
           />
           <IonButton
             data-testid="confirm-action-button"

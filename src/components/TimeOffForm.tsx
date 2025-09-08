@@ -8,7 +8,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonTextarea,
-  IonText,
+  useIonToast,
 } from "@ionic/react";
 import { TimeOffRequest } from "../api/timeOffApi";
 import FieldError from "./FieldError";
@@ -41,22 +41,40 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
       notes: "",
     },
   });
-  console.log(errors);
+
+  const [present] = useIonToast();
+
   const onFormSubmit = (data: FormValues) => {
     const newRequest: TimeOffRequest = {
       id: Date.now().toString(),
       ...data,
       status: "Pending",
     };
-    console.log("valid");
     onSubmit(newRequest);
     reset();
+
+    present({
+      message: "Request submitted successfully!",
+      duration: 2000,
+      color: "success",
+      position: "bottom",
+    });
+  };
+
+  const onError = () => {
+    present({
+      message: "Please fix the validation errors before submitting.",
+      duration: 2000,
+      color: "danger",
+      position: "bottom",
+      cssClass: "custom-toast",
+    });
   };
 
   const startDateValue = watch("startDate");
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
+    <form onSubmit={handleSubmit(onFormSubmit, onError)}>
       {/* Start Date */}
       <IonItem>
         <IonLabel position="stacked">Start Date</IonLabel>
@@ -65,11 +83,15 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           name="startDate"
           rules={{ required: "Start date is required" }}
           render={({ field }) => (
-            <IonInput type="date" {...field} onIonChange={field.onChange} />
+            <IonInput
+              data-testid="start-date-input"
+              type="date"
+              {...field}
+              onIonChange={field.onChange}
+            />
           )}
         />
       </IonItem>
-
       <FieldError message={errors.startDate?.message} />
 
       {/* End Date */}
@@ -86,21 +108,29 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
               "End date cannot be before start date",
           }}
           render={({ field }) => (
-            <IonInput type="date" {...field} onIonChange={field.onChange} />
+            <IonInput
+              data-testid="end-date-input"
+              type="date"
+              {...field}
+              onIonChange={field.onChange}
+            />
           )}
         />
       </IonItem>
-
       <FieldError message={errors.endDate?.message} />
 
       {/* Type */}
       <IonItem>
-        <IonLabel>Type</IonLabel>
+        <IonLabel position="stacked">Type</IonLabel>
         <Controller
           control={control}
           name="type"
           render={({ field }) => (
-            <IonSelect {...field}>
+            <IonSelect
+              data-testid="type-select"
+              {...field}
+              onIonChange={field.onChange}
+            >
               <IonSelectOption value="Vacation">Vacation</IonSelectOption>
               <IonSelectOption value="Sick">Sick</IonSelectOption>
               <IonSelectOption value="Personal">Personal</IonSelectOption>
@@ -121,13 +151,23 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
               message: "Notes cannot exceed 500 characters",
             },
           }}
-          render={({ field }) => <IonTextarea {...field} />}
+          render={({ field }) => (
+            <IonTextarea
+              data-testid="notes-textarea"
+              {...field}
+              onIonInput={field.onChange}
+            />
+          )}
         />
       </IonItem>
-
       <FieldError message={errors.notes?.message} />
 
-      <IonButton expand="block" type="submit">
+      <IonButton
+        id="submitButton"
+        data-testid="submit-request-button"
+        expand="block"
+        type="submit"
+      >
         Submit Request
       </IonButton>
     </form>
