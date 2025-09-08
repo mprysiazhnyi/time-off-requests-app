@@ -1,20 +1,35 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import TimeOffForm from "./TimeOffForm";
+import React from "react";
+import { vi, describe, it, expect } from "vitest";
+import userEvent from "@testing-library/user-event";
 
-test("submits a time off request with required fields", () => {
-    const handleSubmit = jest.fn();
-
+describe("TimeOffForm", () => {
+  it("submits a time off request with required fields", async () => {
+    const user = userEvent.setup();
+    const handleSubmit = vi.fn();
     render(<TimeOffForm onSubmit={handleSubmit} />);
 
-    fireEvent.change(screen.getByLabelText(/Start Date/i), { target: { value: "2025-09-10" } });
-    fireEvent.change(screen.getByLabelText(/End Date/i), { target: { value: "2025-09-12" } });
+    fireEvent(
+      screen.getByTestId("start-date-input"),
+      new CustomEvent("ionChange", { detail: { value: "2025-09-10" } }),
+    );
+    fireEvent(
+      screen.getByTestId("end-date-input"),
+      new CustomEvent("ionChange", { detail: { value: "2025-09-12" } }),
+    );
 
-    fireEvent.click(screen.getByText(/Submit Request/i));
+    await user.click(screen.getByTestId("submit-request"));
 
-    expect(handleSubmit).toHaveBeenCalled();
-    expect(handleSubmit.mock.calls[0][0]).toMatchObject({
-        startDate: "2025-09-10",
-        endDate: "2025-09-12",
-        status: "Pending",
+    await waitFor(() => expect(handleSubmit).toHaveBeenCalledTimes(1));
+
+    expect(handleSubmit).toHaveBeenCalledWith({
+      endDate: "2025-09-12",
+      id: expect.any(String),
+      notes: "",
+      startDate: "2025-09-10",
+      status: "Pending",
+      type: "Vacation",
     });
+  });
 });

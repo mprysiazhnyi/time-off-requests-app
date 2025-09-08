@@ -40,8 +40,12 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
     },
   });
 
-  const handleDecision = (id: string, status: "Approved" | "Rejected") => {
-    decisionMutation.mutate({ id, status });
+  const handleDecision = (
+    id: string,
+    status: "Approved" | "Rejected",
+    supervisorNote?: string,
+  ) => {
+    decisionMutation.mutate({ id, status, supervisorNote });
   };
 
   const goBackToMenu = () => {

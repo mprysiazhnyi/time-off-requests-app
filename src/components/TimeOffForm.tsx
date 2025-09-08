@@ -43,6 +43,7 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
       <IonItem>
         <IonLabel position="stacked">Start Date</IonLabel>
         <IonInput
+          data-testid="start-date-input"
           type="date"
           value={startDate}
           onIonChange={(e) => setStartDate(e.detail.value!)}
@@ -51,6 +52,7 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
       <IonItem>
         <IonLabel position="stacked">End Date</IonLabel>
         <IonInput
+          data-testid="end-date-input"
           type="date"
           value={endDate}
           onIonChange={(e) => setEndDate(e.detail.value!)}
@@ -71,7 +73,11 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           onIonChange={(e) => setNotes(e.detail.value!)}
         />
       </IonItem>
-      <IonButton expand="block" onClick={handleSubmit}>
+      <IonButton
+        data-testid="submit-request"
+        expand="block"
+        onClick={handleSubmit}
+      >
         Submit Request
       </IonButton>
     </>

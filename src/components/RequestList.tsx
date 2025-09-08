@@ -4,7 +4,11 @@ import { TimeOffRequest } from "../api/timeOffApi";
 
 interface Props {
   requests: TimeOffRequest[];
-  onDecision?: (id: string, status: "Approved" | "Rejected") => void;
+  onDecision?: (
+    id: string,
+    status: "Approved" | "Rejected",
+    supervisorNote?: string,
+  ) => void;
 }
 
 const RequestList: React.FC<Props> = ({ requests, onDecision }) => (
