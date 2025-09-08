@@ -1,2 +1,9 @@
-import "@ionic/react/css/core.css";
-import "../src/theme/variables.css";
+import "../src/vendor";
+import { setupIonicReact } from "@ionic/react";
+
+setupIonicReact();
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  controls: { expanded: true },
+};

@@ -41,3 +41,5 @@ app-example
 .idea
 .vscode
 .expo
+*storybook.log
+storybook-static

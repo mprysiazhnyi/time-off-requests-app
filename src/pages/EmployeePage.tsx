@@ -13,6 +13,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TimeOffForm from "../components/TimeOffForm";
 import RequestList from "../components/RequestList";
 import { timeOffApi, TimeOffRequest } from "../api/timeOffApi";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 interface EmployeePageProps extends RouteComponentProps {}
 
@@ -41,12 +42,13 @@ export const EmployeePage: React.FC<EmployeePageProps> = ({ history }) => {
     history.push("/");
   };
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <IonPage>
-        <IonContent>Loading...</IonContent>
+        <LoadingIndicator message="Loading requests..." />
       </IonPage>
     );
+  }
 
   return (
     <IonPage>

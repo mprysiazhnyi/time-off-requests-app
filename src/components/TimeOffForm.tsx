@@ -8,7 +8,7 @@ import {
   IonSelectOption,
   IonTextarea,
 } from "@ionic/react";
-import { TimeOffRequest } from "../types/mockData";
+import { TimeOffRequest } from "../api/timeOffApi";
 
 interface Props {
   onSubmit: (request: TimeOffRequest) => void;
