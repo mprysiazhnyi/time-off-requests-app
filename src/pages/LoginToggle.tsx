@@ -1,28 +1,40 @@
-import React, { useState } from "react";
-import { IonButton, IonPage, IonContent, IonHeader, IonToolbar, IonTitle } from "@ionic/react";
-import EmployeePage from "./EmployeePage";
-import SupervisorPage from "./SupervisorPage";
+import React from "react";
+import {
+  IonPage,
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButton,
+} from "@ionic/react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-const LoginToggle: React.FC = () => {
-    const [role, setRole] = useState<"employee" | "supervisor" | null>(null);
+interface LoginToggleProps extends RouteComponentProps {}
 
-    if (!role) {
-        return (
-            <IonPage>
-                <IonHeader>
-                    <IonToolbar>
-                        <IonTitle>Choose Role</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <IonContent className="ion-padding">
-                    <IonButton expand="block" onClick={() => setRole("employee")}>Employee</IonButton>
-                    <IonButton expand="block" onClick={() => setRole("supervisor")}>Supervisor</IonButton>
-                </IonContent>
-            </IonPage>
-        );
-    }
+export const LoginToggle: React.FC<LoginToggleProps> = ({ history }) => {
+  const goToEmployee = () => {
+    history.push("/employee");
+  };
 
-    return role === "employee" ? <EmployeePage /> : <SupervisorPage />;
+  const goToSupervisor = () => {
+    history.push("/supervisor");
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Choose Role</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="ion-padding">
+        <IonButton expand="block" onClick={goToEmployee}>
+          Employee
+        </IonButton>
+        <IonButton expand="block" onClick={goToSupervisor}>
+          Supervisor
+        </IonButton>
+      </IonContent>
+    </IonPage>
+  );
 };
-
-export default LoginToggle;

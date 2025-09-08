@@ -1,29 +1,45 @@
 import React, { useState } from "react";
-import { IonContent, IonPage, IonHeader, IonTitle, IonToolbar } from "@ionic/react";
-import { TimeOffRequest } from "../data/mockData";
+import {
+  IonContent,
+  IonPage,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonButton,
+} from "@ionic/react";
 import RequestList from "../components/RequestList";
+import { TimeOffRequest } from "../api/timeOffApi";
+import { RouteComponentProps } from "react-router-dom";
 
-const SupervisorPage: React.FC = () => {
-    const [requests, setRequests] = useState<TimeOffRequest[]>([]);
+interface SupervisorPageProps extends RouteComponentProps {}
 
-    const handleDecision = (id: string, status: "Approved" | "Rejected") => {
-        setRequests(prev =>
-            prev.map(r => (r.id === id ? { ...r, status } : r))
-        );
-    };
+export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
+  const [requests, setRequests] = useState<TimeOffRequest[]>([]);
 
-    return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Supervisor Portal</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent className="ion-padding">
-                <RequestList requests={requests} onDecision={handleDecision} />
-            </IonContent>
-        </IonPage>
+  const handleDecision = (id: string, status: "Approved" | "Rejected") => {
+    setRequests((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, status } : r)),
     );
-};
+  };
 
-export default SupervisorPage;
+  const goBackToMenu = () => {
+    history.push("/"); // replace "/menu" with your actual menu route
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton onClick={goBackToMenu}>Back</IonButton>
+          </IonButtons>{" "}
+          <IonTitle>Supervisor Portal</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="ion-padding">
+        <RequestList requests={requests} onDecision={handleDecision} />
+      </IonContent>
+    </IonPage>
+  );
+};
