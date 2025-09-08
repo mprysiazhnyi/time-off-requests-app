@@ -67,7 +67,6 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
       duration: 2000,
       color: "danger",
       position: "bottom",
-      cssClass: "custom-toast",
     });
   };
 
@@ -86,7 +85,8 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
             <IonInput
               data-testid="start-date-input"
               type="date"
-              {...field}
+              value={field.value}
+              onChange={field.onChange}
               onIonChange={field.onChange}
             />
           )}
@@ -111,7 +111,8 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
             <IonInput
               data-testid="end-date-input"
               type="date"
-              {...field}
+              value={field.value}
+              onChange={field.onChange}
               onIonChange={field.onChange}
             />
           )}
@@ -128,7 +129,8 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           render={({ field }) => (
             <IonSelect
               data-testid="type-select"
-              {...field}
+              value={field.value}
+              onChange={field.onChange}
               onIonChange={field.onChange}
             >
               <IonSelectOption value="Vacation">Vacation</IonSelectOption>
@@ -154,7 +156,8 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           render={({ field }) => (
             <IonTextarea
               data-testid="notes-textarea"
-              {...field}
+              value={field.value}
+              onChange={field.onChange}
               onIonInput={field.onChange}
             />
           )}
