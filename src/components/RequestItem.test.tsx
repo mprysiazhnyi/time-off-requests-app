@@ -23,7 +23,7 @@ describe("RequestItem", () => {
     expect(
       screen.getByText(`${mockRequest.startDate} → ${mockRequest.endDate}`),
     ).toBeInTheDocument();
-    expect(screen.getByText(mockRequest.notes)).toBeInTheDocument();
+    expect(screen.getByText(mockRequest.notes!)).toBeInTheDocument();
     expect(screen.getByText(/Supervisor Note:/i).innerHTML).toBe(
       "Supervisor Note: <strong>Existing note</strong>",
     );
