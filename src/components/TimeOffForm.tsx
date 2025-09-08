@@ -49,6 +49,7 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           onIonChange={(e) => setStartDate(e.detail.value!)}
         />
       </IonItem>
+
       <IonItem>
         <IonLabel position="stacked">End Date</IonLabel>
         <IonInput
@@ -58,23 +59,37 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
           onIonChange={(e) => setEndDate(e.detail.value!)}
         />
       </IonItem>
+
       <IonItem>
         <IonLabel>Type</IonLabel>
-        <IonSelect value={type} onIonChange={(e) => setType(e.detail.value)}>
-          <IonSelectOption value="Vacation">Vacation</IonSelectOption>
-          <IonSelectOption value="Sick">Sick</IonSelectOption>
-          <IonSelectOption value="Personal">Personal</IonSelectOption>
+        <IonSelect
+          data-testid="type-select"
+          value={type}
+          onIonChange={(e) => setType(e.detail.value)}
+        >
+          <IonSelectOption value="Vacation" data-testid="type-vacation">
+            Vacation
+          </IonSelectOption>
+          <IonSelectOption value="Sick" data-testid="type-sick">
+            Sick
+          </IonSelectOption>
+          <IonSelectOption value="Personal" data-testid="type-personal">
+            Personal
+          </IonSelectOption>
         </IonSelect>
       </IonItem>
+
       <IonItem>
         <IonLabel position="stacked">Notes</IonLabel>
         <IonTextarea
+          data-testid="notes-textarea"
           value={notes}
           onIonChange={(e) => setNotes(e.detail.value!)}
         />
       </IonItem>
+
       <IonButton
-        data-testid="submit-request"
+        data-testid="submit-request-button"
         expand="block"
         onClick={handleSubmit}
       >
