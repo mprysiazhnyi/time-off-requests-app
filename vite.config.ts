@@ -1,4 +1,5 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
+// @ts-ignore
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
