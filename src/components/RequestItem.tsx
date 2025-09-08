@@ -42,7 +42,6 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
   };
 
   const handleConfirm = () => {
-    console.log("action", currentAction);
     if (currentAction) {
       onDecision?.(request.id, currentAction, note || undefined);
     }
@@ -70,13 +69,7 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
           </p>
           {onDecision && request.status === "Pending" && (
             <>
-              <IonButton
-                color="success"
-                onClick={function () {
-                  console.log("APPROVE");
-                  return openModal("Approved");
-                }}
-              >
+              <IonButton color="success" onClick={() => openModal("Approved")}>
                 Approve
               </IonButton>
               <IonButton color="danger" onClick={() => openModal("Rejected")}>
@@ -94,10 +87,7 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
             <IonButtons slot="end">
               <IonButton
                 data-testid="close"
-                onClick={function () {
-                  console.log("CLOSE");
-                  return setShowModal(false);
-                }}
+                onClick={() => setShowModal(false)}
               >
                 <IonIcon icon={close} />
               </IonButton>
