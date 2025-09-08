@@ -50,29 +50,37 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
 
   return (
     <>
-      <IonCard>
+      <IonCard data-testid={`request-card-${request.id}`}>
         <IonCardHeader>
-          <IonCardTitle>{request.type}</IonCardTitle>
-          <IonCardSubtitle>
+          <IonCardTitle data-testid="request-type">{request.type}</IonCardTitle>
+          <IonCardSubtitle data-testid="request-dates">
             {request.startDate} → {request.endDate}
           </IonCardSubtitle>
         </IonCardHeader>
         <IonCardContent>
-          <p>{request.notes}</p>
+          <p data-testid="request-notes">{request.notes}</p>
           {request.supervisorNote && (
-            <p>
+            <p data-testid="request-supervisor-note">
               Supervisor Note: <strong>{request.supervisorNote}</strong>
             </p>
           )}
-          <p>
+          <p data-testid="request-status">
             Status: <strong>{request.status}</strong>
           </p>
           {onDecision && request.status === "Pending" && (
             <>
-              <IonButton color="success" onClick={() => openModal("Approved")}>
+              <IonButton
+                data-testid="approve-button"
+                color="success"
+                onClick={() => openModal("Approved")}
+              >
                 Approve
               </IonButton>
-              <IonButton color="danger" onClick={() => openModal("Rejected")}>
+              <IonButton
+                data-testid="reject-button"
+                color="danger"
+                onClick={() => openModal("Rejected")}
+              >
                 Reject
               </IonButton>
             </>
@@ -80,13 +88,17 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
         </IonCardContent>
       </IonCard>
 
-      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+      <IonModal
+        data-testid="action-modal"
+        isOpen={showModal}
+        onDidDismiss={() => setShowModal(false)}
+      >
         <IonHeader>
           <IonToolbar>
             <IonTitle>Add Note</IonTitle>
             <IonButtons slot="end">
               <IonButton
-                data-testid="close"
+                data-testid="close-button"
                 onClick={() => setShowModal(false)}
               >
                 <IonIcon icon={close} />
@@ -96,12 +108,13 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
         </IonHeader>
         <IonContent className="ion-padding">
           <IonTextarea
+            data-testid="note-textarea"
             placeholder="Optional note..."
             value={note}
             onIonChange={(e) => setNote(e.detail.value!)}
           />
           <IonButton
-            data-testid="confirm-action"
+            data-testid="confirm-action-button"
             expand="full"
             onClick={() => handleConfirm()}
             className="ion-margin-top"
