@@ -19,7 +19,7 @@ describe("TimeOffForm", () => {
       new CustomEvent("ionChange", { detail: { value: "2025-09-12" } }),
     );
 
-    await user.click(screen.getByTestId("submit-request"));
+    await user.click(screen.getByTestId("submit-request-button"));
 
     await waitFor(() => expect(handleSubmit).toHaveBeenCalledTimes(1));
 
