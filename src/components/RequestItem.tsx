@@ -114,9 +114,7 @@ const RequestItem: React.FC<Props> = ({ request, onDecision }) => {
           <p id="modal-description">
             Add an optional note before confirming the request.
           </p>
-          <label htmlFor="note-textarea" className="visually-hidden">
-            Optional note
-          </label>
+
           <IonTextarea
             id="note-textarea"
             data-testid="note-textarea"
