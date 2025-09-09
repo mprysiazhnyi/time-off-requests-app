@@ -2,7 +2,7 @@
 
 A **React + Ionic** application for managing employee time-off requests with a supervisor approval workflow.
 
-Live demo available on GitHub Pages: https://time-off-requests-app.netlify.app/home
+Live demo available on Netlify: https://time-off-requests-app.netlify.app/
 ## Features
 
 - Display a list of employee time-off requests.
