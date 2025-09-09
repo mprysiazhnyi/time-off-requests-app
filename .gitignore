@@ -43,3 +43,5 @@ app-example
 .expo
 *storybook.log
 storybook-static
+
+coverage
