@@ -25,6 +25,9 @@ jobs:
       - name: Run tests
         run: yarn test:ci
 
+      - name: Check build output
+        run: ls -la ./dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
