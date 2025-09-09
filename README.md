@@ -236,6 +236,20 @@ yarn test --coverage
 - The note is controlled via React state (`useState`) and updates on every keystroke (`onIonInput`).
 - Confirming the action calls `onDecision` with the latest note.
 
+## Building & Previewing
+
+Build the production version:
+
+```bash
+yarn build
+```
+
+Preview the production build locally:
+
+```bash
+yarn preview
+```
+
 ## License
 
 MIT License
