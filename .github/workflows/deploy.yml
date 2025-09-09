@@ -23,7 +23,7 @@ jobs:
         run: yarn build # or npm run build
 
       - name: Run tests
-        run: yarn test --watchAll=false # or npm test
+        run: yarn test:ci
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
