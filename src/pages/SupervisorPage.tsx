@@ -60,11 +60,15 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
   }
 
   return (
-    <IonPage data-testid="supervisor-page">
+    <IonPage data-testid="supervisor-page" aria-label="Supervisor portal page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={goBackToMenu} data-testid="back-button">
+            <IonButton
+              onClick={goBackToMenu}
+              data-testid="back-button"
+              aria-label="Go back to main menu"
+            >
               Back
             </IonButton>
           </IonButtons>
@@ -73,7 +77,11 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding" data-testid="supervisor-page-content">
+      <IonContent
+        className="ion-padding"
+        data-testid="supervisor-page-content"
+        role="main"
+      >
         <RequestList
           requests={requests}
           onDecision={handleDecision}

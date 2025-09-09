@@ -13,6 +13,7 @@ const FieldError: React.FC<FieldErrorProps> = ({ message }) => {
       <p
         style={{ margin: "5px 0 10px 15px" }}
         data-testid="field-error-message"
+        role="alert" // announces the error to screen readers immediately
       >
         {message}
       </p>

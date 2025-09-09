@@ -51,18 +51,26 @@ export const EmployeePage: React.FC<EmployeePageProps> = ({ history }) => {
   }
 
   return (
-    <IonPage data-testid="employee-page">
+    <IonPage data-testid="employee-page" aria-label="Employee portal page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={goBackToMenu} data-testid="back-button">
+            <IonButton
+              onClick={goBackToMenu}
+              data-testid="back-button"
+              aria-label="Go back to main menu"
+            >
               Back
             </IonButton>
           </IonButtons>
           <IonTitle data-testid="employee-page-title">Employee Portal</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding" data-testid="employee-page-content">
+      <IonContent
+        className="ion-padding"
+        data-testid="employee-page-content"
+        role="main"
+      >
         <TimeOffForm onSubmit={addRequest} data-testid="timeoff-form" />
         <br />
         <RequestList requests={requests} data-testid="request-list" />

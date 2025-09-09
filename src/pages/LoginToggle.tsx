@@ -21,17 +21,25 @@ export const LoginToggle: React.FC<LoginToggleProps> = ({ history }) => {
   };
 
   return (
-    <IonPage data-testid="login-toggle-page">
+    <IonPage
+      data-testid="login-toggle-page"
+      aria-label="Login role selection page"
+    >
       <IonHeader>
         <IonToolbar>
           <IonTitle data-testid="login-toggle-title">Choose Role</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding" data-testid="login-toggle-content">
+      <IonContent
+        className="ion-padding"
+        data-testid="login-toggle-content"
+        role="main"
+      >
         <IonButton
           expand="block"
           onClick={goToEmployee}
           data-testid="employee-button"
+          aria-label="Login as Employee"
         >
           Employee
         </IonButton>
@@ -39,6 +47,7 @@ export const LoginToggle: React.FC<LoginToggleProps> = ({ history }) => {
           expand="block"
           onClick={goToSupervisor}
           data-testid="supervisor-button"
+          aria-label="Login as Supervisor"
         >
           Supervisor
         </IonButton>
