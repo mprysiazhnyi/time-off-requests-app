@@ -73,7 +73,10 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
   const startDateValue = watch("startDate");
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit, onError)}>
+    <form
+      onSubmit={handleSubmit(onFormSubmit, onError)}
+      aria-label="Time off request form"
+    >
       {/* Start Date */}
       <IonItem>
         <IonLabel position="stacked">Start Date</IonLabel>
@@ -86,8 +89,9 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
               data-testid="start-date-input"
               type="date"
               value={field.value}
-              onChange={field.onChange}
               onIonChange={field.onChange}
+              aria-required="true"
+              aria-invalid={!!errors.startDate}
             />
           )}
         />
@@ -112,8 +116,9 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
               data-testid="end-date-input"
               type="date"
               value={field.value}
-              onChange={field.onChange}
               onIonChange={field.onChange}
+              aria-required="true"
+              aria-invalid={!!errors.endDate}
             />
           )}
         />
@@ -130,8 +135,8 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
             <IonSelect
               data-testid="type-select"
               value={field.value}
-              onChange={field.onChange}
               onIonChange={field.onChange}
+              aria-label="Select request type"
             >
               <IonSelectOption value="Vacation">Vacation</IonSelectOption>
               <IonSelectOption value="Sick">Sick</IonSelectOption>
@@ -157,8 +162,9 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
             <IonTextarea
               data-testid="notes-textarea"
               value={field.value}
-              onChange={field.onChange}
               onIonInput={field.onChange}
+              aria-invalid={!!errors.notes}
+              aria-describedby={errors.notes ? "notes-error" : undefined}
             />
           )}
         />
@@ -166,10 +172,10 @@ const TimeOffForm: React.FC<Props> = ({ onSubmit }) => {
       <FieldError message={errors.notes?.message} />
 
       <IonButton
-        id="submitButton"
         data-testid="submit-request-button"
         expand="block"
         type="submit"
+        aria-label="Submit time off request"
       >
         Submit Request
       </IonButton>
