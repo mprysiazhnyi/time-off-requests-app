@@ -203,6 +203,31 @@ Errors are displayed via the `FieldError` component under each input field.
 * You can use `TimeOffForm` to create requests, and `RequestItem` to display them.
 * Each submitted request will have an initial `status: "Pending"` and can later be approved/rejected via `RequestItem`.
 
+## Testing
+
+This project uses **Vitest** with **@testing-library/react** for component testing.
+
+### Example tests
+
+* **Unit tests**
+  Validate component rendering and props handling (e.g., `RequestItem` renders correct status, `TimeOffForm` validates dates).
+
+* **Integration tests**
+  Check form submission flow, supervisor decision modal, and toast notifications.
+
+### Running tests
+
+By default, Vitest runs in **watch mode** when you start it:
+
+```bash
+yarn test
+```
+
+To run tests once with coverage:
+
+```bash
+yarn test --coverage
+```
 ## How It Works
 
 - Each request is displayed as an `IonCard`.
