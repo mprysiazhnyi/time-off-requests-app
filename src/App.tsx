@@ -35,7 +35,7 @@ const App: React.FC = function () {
   return (
     <QueryClientProvider client={queryClient}>
       <IonApp>
-        <IonReactRouter>
+        <IonReactRouter basename={import.meta.env.VITE_BASE}>
           {/* @ts-expect-error TS2786 */}
           <RouterBlur>
             <IonRouterOutlet>
