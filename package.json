@@ -2,7 +2,6 @@
   "name": "time-off-requests-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://mprysiazhnyi.github.io/time-off-requests-app",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
