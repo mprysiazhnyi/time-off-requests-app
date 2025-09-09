@@ -7,7 +7,7 @@ import {
   IonTitle,
   IonButton,
 } from "@ionic/react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 
 interface LoginToggleProps extends RouteComponentProps {}
 
@@ -21,17 +21,25 @@ export const LoginToggle: React.FC<LoginToggleProps> = ({ history }) => {
   };
 
   return (
-    <IonPage>
+    <IonPage data-testid="login-toggle-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Choose Role</IonTitle>
+          <IonTitle data-testid="login-toggle-title">Choose Role</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonButton expand="block" onClick={goToEmployee}>
+      <IonContent className="ion-padding" data-testid="login-toggle-content">
+        <IonButton
+          expand="block"
+          onClick={goToEmployee}
+          data-testid="employee-button"
+        >
           Employee
         </IonButton>
-        <IonButton expand="block" onClick={goToSupervisor}>
+        <IonButton
+          expand="block"
+          onClick={goToSupervisor}
+          data-testid="supervisor-button"
+        >
           Supervisor
         </IonButton>
       </IonContent>

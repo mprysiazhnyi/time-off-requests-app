@@ -21,7 +21,7 @@ export const EmployeePage: React.FC<EmployeePageProps> = ({ history }) => {
   const queryClient = useQueryClient();
 
   const { data: requests = [], isLoading } = useQuery<TimeOffRequest[], Error>({
-    queryKey: ["timeOffRequests"], // this replaces the array shorthand
+    queryKey: ["timeOffRequests"],
     queryFn: timeOffApi.getRequests,
   });
 
@@ -44,26 +44,28 @@ export const EmployeePage: React.FC<EmployeePageProps> = ({ history }) => {
 
   if (isLoading) {
     return (
-      <IonPage>
+      <IonPage data-testid="employee-page-loading">
         <LoadingIndicator message="Loading requests..." />
       </IonPage>
     );
   }
 
   return (
-    <IonPage>
+    <IonPage data-testid="employee-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={goBackToMenu}>Back</IonButton>
+            <IonButton onClick={goBackToMenu} data-testid="back-button">
+              Back
+            </IonButton>
           </IonButtons>
-          <IonTitle>Employee Portal</IonTitle>
+          <IonTitle data-testid="employee-page-title">Employee Portal</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <TimeOffForm onSubmit={addRequest} />
+      <IonContent className="ion-padding" data-testid="employee-page-content">
+        <TimeOffForm onSubmit={addRequest} data-testid="timeoff-form" />
         <br />
-        <RequestList requests={requests} />
+        <RequestList requests={requests} data-testid="request-list" />
       </IonContent>
     </IonPage>
   );

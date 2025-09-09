@@ -21,7 +21,7 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
   const queryClient = useQueryClient();
 
   const { data: requests = [], isLoading } = useQuery<TimeOffRequest[], Error>({
-    queryKey: ["timeOffRequests"], // this replaces the array shorthand
+    queryKey: ["timeOffRequests"],
     queryFn: timeOffApi.getRequests,
   });
 
@@ -33,7 +33,6 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
     mutationFn: ({ id, status, supervisorNote }) =>
       timeOffApi.updateTimeOffRequest(id, status, supervisorNote)!,
     onSuccess: (updatedRequest) => {
-      // Update the cache directly without refetching
       queryClient.setQueryData<TimeOffRequest[]>(["timeOffRequests"], (old) =>
         old?.map((r) => (r.id === updatedRequest.id ? updatedRequest : r)),
       );
@@ -49,29 +48,37 @@ export const SupervisorPage: React.FC<SupervisorPageProps> = ({ history }) => {
   };
 
   const goBackToMenu = () => {
-    history.push("/"); // adjust menu route if needed
+    history.push("/");
   };
 
   if (isLoading) {
     return (
-      <IonPage>
+      <IonPage data-testid="supervisor-page-loading">
         <LoadingIndicator message="Loading requests..." />
       </IonPage>
     );
   }
 
   return (
-    <IonPage>
+    <IonPage data-testid="supervisor-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={goBackToMenu}>Back</IonButton>
+            <IonButton onClick={goBackToMenu} data-testid="back-button">
+              Back
+            </IonButton>
           </IonButtons>
-          <IonTitle>Supervisor Portal</IonTitle>
+          <IonTitle data-testid="supervisor-page-title">
+            Supervisor Portal
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <RequestList requests={requests} onDecision={handleDecision} />
+      <IonContent className="ion-padding" data-testid="supervisor-page-content">
+        <RequestList
+          requests={requests}
+          onDecision={handleDecision}
+          data-testid="request-list"
+        />
       </IonContent>
     </IonPage>
   );

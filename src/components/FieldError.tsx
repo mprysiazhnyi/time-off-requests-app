@@ -10,7 +10,12 @@ const FieldError: React.FC<FieldErrorProps> = ({ message }) => {
 
   return (
     <IonText color="danger">
-      <p style={{ margin: "5px 0 10px 15px" }}>{message}</p>
+      <p
+        style={{ margin: "5px 0 10px 15px" }}
+        data-testid="field-error-message"
+      >
+        {message}
+      </p>
     </IonText>
   );
 };
