@@ -5,6 +5,7 @@ import { loadEnv } from "vite";
 // https://vitejs.dev/config/
 // @ts-ignore
 export default ({ mode }) => {
+  console.log("mode", mode, process.cwd());
   // Load environment variables
   const env = loadEnv(mode, process.cwd(), "");
   return defineConfig({
