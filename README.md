@@ -124,6 +124,85 @@ interface Props {
 />
 ```
 
+### `TimeOffForm`
+
+**Purpose:**
+A form for creating new time-off requests with validation and toast notifications.
+
+**Props:**
+
+```ts
+interface Props {
+  onSubmit: (request: TimeOffRequest) => void;
+}
+```
+
+**Form Fields (`FormValues`):**
+
+```ts
+interface FormValues {
+  startDate: string;
+  endDate: string;
+  type: "Vacation" | "Sick" | "Personal";
+  notes: string;
+}
+```
+
+**Features:**
+
+* Controlled inputs using **React Hook Form** (`Controller`)
+* Validations:
+
+    * `startDate` required
+    * `endDate` required and cannot be before `startDate`
+    * `notes` max length 500
+* `type` selection: Vacation, Sick, Personal
+* Uses **Ionic components** for inputs (`IonInput`, `IonSelect`, `IonTextarea`)
+* Toast notifications using `useIonToast` for:
+
+    * Successful submission
+    * Validation errors
+* Automatically resets form on successful submission
+
+**Usage Example:**
+
+```tsx
+<TimeOffForm
+  onSubmit={(request) => {
+    console.log("New request:", request);
+  }}
+/>
+```
+
+**Behavior on Submission:**
+
+1. Generates a new `TimeOffRequest` object:
+
+   ```ts
+   const newRequest: TimeOffRequest = {
+     id: Date.now().toString(),
+     startDate,
+     endDate,
+     type,
+     notes,
+     status: "Pending",
+   };
+   ```
+2. Calls `onSubmit(newRequest)`
+3. Resets the form
+4. Shows a success toast
+
+**Validation Feedback:**
+
+Errors are displayed via the `FieldError` component under each input field.
+
+---
+
+✅ **Integration with `RequestItem`:**
+
+* You can use `TimeOffForm` to create requests, and `RequestItem` to display them.
+* Each submitted request will have an initial `status: "Pending"` and can later be approved/rejected via `RequestItem`.
+
 ## How It Works
 
 - Each request is displayed as an `IonCard`.
